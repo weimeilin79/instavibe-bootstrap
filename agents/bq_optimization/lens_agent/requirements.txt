@@ -1,0 +1,17 @@
+google-cloud-aiplatform
+google-generativeai
+google-api-python-client
+google-auth
+google-auth-httplib2
+google-auth-oauthlib
+google-cloud-bigquery
+google-cloud-storage
+google-cloud-logging
+nest-asyncio
+python-dotenv
+google-adk
+uvicorn
+fastapi
+
+../../a2a_common-0.1.0-py3-none-any.whl
+# mcp-toolbox-db will be added here once we confirm its name and usage for MCP server

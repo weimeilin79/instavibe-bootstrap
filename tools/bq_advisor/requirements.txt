@@ -1,0 +1,8 @@
+python-dotenv
+uvicorn
+starlette
+mcp # Base MCP library
+google-adk # For FunctionTool and conversion utils
+
+# Add mcp-toolbox-db here if/when its package name and availability are confirmed
+# Example: mcp-toolbox-database

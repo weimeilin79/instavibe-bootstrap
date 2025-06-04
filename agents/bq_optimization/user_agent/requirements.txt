@@ -1,0 +1,23 @@
+google-cloud-aiplatform
+google-generativeai
+# google-ads-googleads # Likely not needed for BQ agent
+google-api-python-client
+google-auth
+google-auth-httplib2
+google-auth-oauthlib
+google-cloud-bigquery
+# google-cloud-spanner # Likely not needed for BQ agent
+google-cloud-storage
+google-cloud-logging
+# langchain # Not directly used by this simple agent, consider removing if not needed by ADK core
+# langchain-google-genai
+# langchain-google-vertexai
+# langchain-community
+nest-asyncio
+python-dotenv
+google-adk
+uvicorn # Added
+fastapi # Added
+
+# Path to the common wheel, assuming it's two levels up from the 'user_agent' directory
+../../a2a_common-0.1.0-py3-none-any.whl

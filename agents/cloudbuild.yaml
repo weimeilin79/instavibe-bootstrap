@@ -1,15 +1,20 @@
 steps:
-  # Build the container image for the specified agent
+  # Build for BigQuery User Agent
   - name: 'gcr.io/cloud-builders/docker'
-    args:
-      [
-        'build',
-        '-t',
-        '${_IMAGE_PATH}', # Use substitution for the full image path + tag
-        '-f',
-        '${_AGENT_NAME}/Dockerfile', # Dynamically point to the correct Dockerfile
-        '.', # Build context is the project root
-      ]
-# Specify the image(s) to push upon successful build.
+    args: ['build', '-t', 'gcr.io/$PROJECT_ID/bq-user-agent:$COMMIT_SHA', '-f', './bq_optimization/user_agent/Dockerfile', './bq_optimization/user_agent']
+    dir: 'agents' # Build context is agents/bq_optimization/user_agent, Dockerfile path relative to dir
+
+  # Build for BigQuery Lens Agent
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['build', '-t', 'gcr.io/$PROJECT_ID/bq-lens-agent:$COMMIT_SHA', '-f', './bq_optimization/lens_agent/Dockerfile', './bq_optimization/lens_agent']
+    dir: 'agents' # Build context is agents/bq_optimization/lens_agent
+
+  # Build for BigQuery Advisor MCP Server
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['build', '-t', 'gcr.io/$PROJECT_ID/bq-advisor-mcp:$COMMIT_SHA', '-f', './bq_advisor/Dockerfile', './bq_advisor']
+    dir: 'tools' # Build context is tools/bq_advisor
+
 images:
-  - '${_IMAGE_PATH}'
+  - 'gcr.io/$PROJECT_ID/bq-user-agent:$COMMIT_SHA'
+  - 'gcr.io/$PROJECT_ID/bq-lens-agent:$COMMIT_SHA'
+  - 'gcr.io/$PROJECT_ID/bq-advisor-mcp:$COMMIT_SHA'
