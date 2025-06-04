@@ -37,9 +37,45 @@ app = Server("adk-tool-mcp-server")
 sse = SseServerTransport("/messages/")
 
 
-#REPLACE ME - LIST TOOLS
+@app.list_tools()
+async def list_tools() -> list[mcp_types.Tool]:
+  """MCP handler to list available tools."""
+  # Convert the ADK tool's definition to MCP format
+  mcp_tool_schema_event = adk_to_mcp_tool_type(event_tool)
+  mcp_tool_schema_post = adk_to_mcp_tool_type(post_tool)
+  print(f"MCP Server: Received list_tools request. \n MCP Server: Advertising tool: {mcp_tool_schema_event.name} and {mcp_tool_schema_post}")
+  return [mcp_tool_schema_event,mcp_tool_schema_post]
 
-#REPLACE ME - CALL TOOLS
+@app.call_tool()
+async def call_tool(
+    name: str, arguments: dict
+) -> list[mcp_types.TextContent | mcp_types.ImageContent | mcp_types.EmbeddedResource]:
+  """MCP handler to execute a tool call."""
+  print(f"MCP Server: Received call_tool request for '{name}' with args: {arguments}")
+
+  # Look up the tool by name in our dictionary
+  tool_to_call = available_tools.get(name)
+  if tool_to_call:
+    try:
+      adk_response = await tool_to_call.run_async(
+          args=arguments,
+          tool_context=None,
+      )
+      print(f"MCP Server: ADK tool '{name}' executed successfully.")
+
+      response_text = json.dumps(adk_response, indent=2)
+      return [mcp_types.TextContent(type="text", text=response_text)]
+
+    except Exception as e:
+      print(f"MCP Server: Error executing ADK tool '{name}': {e}")
+      # Creating a proper MCP error response might be more robust
+      error_text = json.dumps({"error": f"Failed to execute tool '{name}': {str(e)}"})
+      return [mcp_types.TextContent(type="text", text=error_text)]
+  else:
+      # Handle calls to unknown tools
+      print(f"MCP Server: Tool '{name}' not found.")
+      error_text = json.dumps({"error": f"Tool '{name}' not implemented."})
+      return [mcp_types.TextContent(type="text", text=error_text)]
 
 # --- MCP Remote Server ---
 async def handle_sse(request):

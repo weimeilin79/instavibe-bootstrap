@@ -6,7 +6,8 @@ import os
 
 load_dotenv()
 
-#REPLACE ME initiate agent_engine
+ORCHESTRATE_AGENT_ID = os.environ.get('ORCHESTRATE_AGENT_ID')
+agent_engine = agent_engines.get(ORCHESTRATE_AGENT_ID)
 
 
 def call_agent_for_plan(user_name, planned_date, location_n_perference, selected_friend_names_list):
@@ -61,7 +62,10 @@ def call_agent_for_plan(user_name, planned_date, location_n_perference, selected
     yield {"type": "thought", "data": f"--- Agent Response Stream Starting ---"}
     try:
         for event_idx, event in enumerate(
-            #REPLACE ME Query remote agent get plan
+            agent_engine.stream_query(
+                user_id=user_id,
+                message=prompt_message,
+            )
         ):
             print(f"\n--- Event {event_idx} Received ---") # Console
             pprint.pprint(event) # Console
@@ -191,7 +195,10 @@ def post_plan_event(user_name, confirmed_plan, edited_invite_message, agent_sess
 
     try:
         for event_idx, event in enumerate(
-            #REPLACE ME Query remote agent for confirmation
+            agent_engine.stream_query(
+            user_id=agent_session_user_id,
+            message=prompt_message,
+        )
         ):
             print(f"\n--- Post Event - Agent Event {event_idx} Received ---") # Console
             pprint.pprint(event) # Console
