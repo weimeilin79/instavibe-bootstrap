@@ -14,14 +14,32 @@ from typing import Optional
 # Get a logger instance
 log = logging.getLogger(__name__)
 
-#REPLACE FOR CheckCondition
+# Define the tools
+# This assumes these functions are directly usable as tools or have been
+# decorated/wrapped appropriately elsewhere if needed by LlmAgent.
+# Also ensure these functions are compatible with LlmAgent tool requirements.
+# For example, they might need type hints or specific return structures.
+social_tools = [
+    get_person_posts,
+    get_person_friends,
+    get_person_id_by_name,
+    get_person_attended_events
+]
 
-#REPLACE FOR profile_agent
+# Define the root_agent
+root_agent = LlmAgent(
+    model='gemini-pro', # Or another appropriate model
+    name='social_agent_from_llm', # Renamed to avoid conflict
+    instruction="""\
+You are the Instavibe Social Agent.
+Your goal is to help users get information about people, their posts, friends, and events using the available tools.
+- Use `get_person_posts` to find posts by a person.
+- Use `get_person_friends` to find friends of a person.
+- Use `get_person_id_by_name` to get a person's ID if you only have their name.
+- Use `get_person_attended_events` to find events a person has attended.
+Be helpful and use the tools as needed to answer user queries.
+""",
+    tools=social_tools
+)
 
-#REPLACE FOR summary_agent
-
-#REPLACE FOR check_agent
-
-#REPLACE FOR modify_output_after_agent
-
-#REPLACE FOR root_agent
+log.info("Social agent 'root_agent' initialized with LlmAgent.")

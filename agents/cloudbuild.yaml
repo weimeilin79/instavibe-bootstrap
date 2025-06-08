@@ -1,15 +1,35 @@
 steps:
-  # Build the container image for the specified agent
-  - name: 'gcr.io/cloud-builders/docker'
-    args:
-      [
-        'build',
-        '-t',
-        '${_IMAGE_PATH}', # Use substitution for the full image path + tag
-        '-f',
-        '${_AGENT_NAME}/Dockerfile', # Dynamically point to the correct Dockerfile
-        '.', # Build context is the project root
-      ]
-# Specify the image(s) to push upon successful build.
-images:
-  - '${_IMAGE_PATH}'
+  # Step 1: Install Python dependencies for the deploy scripts
+  - name: 'python:3.12-slim' # Using a Python image to install dependencies
+    entrypoint: 'pip'
+    args: ['install', 'google-cloud-aiplatform>=1.38.0', 'google-cloud-discoveryengine'] # Add other deploy-time dependencies if any
+
+  # Step 2: Deploy Orchestrate Agent
+  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+    entrypoint: 'python'
+    args: ['./agents/orchestrate/deploy.py']
+    env:
+      - 'PYTHONPATH=./' # Ensure correct module resolution
+
+  # Step 3: Deploy Planner Agent
+  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+    entrypoint: 'python'
+    args: ['./agents/planner/deploy.py']
+    env:
+      - 'PYTHONPATH=./'
+
+  # Step 4: Deploy Platform MCP Client Agent
+  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+    entrypoint: 'python'
+    args: ['./agents/platform_mcp_client/deploy.py']
+    env:
+      - 'PYTHONPATH=./'
+
+  # Step 5: Deploy Social Agent
+  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+    entrypoint: 'python'
+    args: ['./agents/social/deploy.py']
+    env:
+      - 'PYTHONPATH=./'
+
+# No images to push as ReasoningEngine.create handles packaging and deployment
