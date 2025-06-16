@@ -5,7 +5,7 @@ from google.adk.agents.llm_agent import LlmAgent
 from google.adk.tools.mcp_tool.mcp_toolset import MCPToolset, SseServerParams
 import logging 
 import os
-import nest_asyncio # Import nest_asyncio
+import nest_asyncio 
 
 
 # Load environment variables from .env file in the parent directory
@@ -23,9 +23,11 @@ exit_stack: AsyncExitStack | None = None
 
 
 async def get_tools_async():
+  print("Attempting to connect to MCP Filesystem server...")
   #REPLACE ME - FETCH TOOLS
+  log.info("MCP Toolset created successfully.")
 
-  return tools, exit_stack
+  return tools
  
 
 async def get_agent_async():
@@ -35,10 +37,10 @@ async def get_agent_async():
   Returns:
       tuple: (LlmAgent instance, AsyncExitStack instance for cleanup)
   """
-  tools, exit_stack = await get_tools_async()
+  tools = await get_tools_async()
 
   root_agent = LlmAgent(
-      model='gemini-2.0-flash', # Adjust model name if needed based on availability
+      model='gemini-2.5-pro-preview-06-05', # Adjust model name if needed based on availability
       name='social_agent',
       instruction="""
         You are a friendly and efficient assistant for the Instavibe social app.
@@ -67,15 +69,15 @@ async def get_agent_async():
   print("LlmAgent created.")
 
   # Return both the agent and the exit_stack needed for cleanup
-  return root_agent, exit_stack
+  return root_agent
 
 
 async def initialize():
    """Initializes the global root_agent and exit_stack."""
-   global root_agent, exit_stack
+   global root_agent
    if root_agent is None:
        log.info("Initializing agent...")
-       root_agent, exit_stack = await get_agent_async()
+       root_agent = await get_agent_async()
        if root_agent:
            log.info("Agent initialized successfully.")
        else:
@@ -86,13 +88,9 @@ async def initialize():
 
 def _cleanup_sync():
     """Synchronous wrapper to attempt async cleanup."""
-    if exit_stack:
-        log.info("Attempting to close MCP connection via atexit...")
-        try:
-            asyncio.run(exit_stack.aclose())
-            log.info("MCP connection closed via atexit.")
-        except Exception as e:
-            log.error(f"Error during atexit cleanup: {e}", exc_info=True)
+    log.info("MCP connection cleanup is now handled externally.")
+    # No specific cleanup action needed here as exit_stack is managed elsewhere.
+    pass 
 
 
 nest_asyncio.apply()
@@ -105,4 +103,3 @@ except RuntimeError as e:
     log.error(f"RuntimeError during module level initialization (likely nested loops): {e}", exc_info=True)
 except Exception as e:
     log.error(f"Unexpected error during module level initialization: {e}", exc_info=True)
-

@@ -1,55 +1,194 @@
-[
-  {
-    "name": "boston",
-    "data": [
-      {
-        "query": "Plan something for me in Boston on the weekend of May 19th 2025, and something on nightlife and shows",
-        "expected_tool_use": [],
-        "expected_intermediate_agent_responses": [
-          {
-            "author": "location_search_agent",
-            "text": "Here are a few ideas for a fun date weekend in Boston focused on nightlife and shows, with a moderate budget in mind. You can catch some laughs at a comedy club, enjoy live music, and experience the vibrant atmosphere of a rooftop bar. This combination offers entertainment and a chance to chat and connect.\n\n"
-          }
-        ],
-        "reference": "```json\n{\n\"fun_plans\": [\n{\n\"plan_description\": \"Start your evening with some side-splitting laughter at a renowned Boston comedy club. After the show, head to a lively spot for drinks and conversation. It's a great way to break the ice and enjoy a fun night out.\",\n\"locations_and_activities\": [\n{\n\"name\": \"Laugh Boston\",\n\"latitude\": 42.348487,\n\"longitude\": -71.045779,\n\"description\": \"Located in the Seaport District, Laugh Boston is a state-of-the-art comedy club featuring top touring comedians. They have shows scheduled throughout the weekend, offering a fantastic opportunity for a date night filled with humor.\"\n},\n{\n\"name\": \"Lookout Rooftop and Bar\",\n\"latitude\": 42.351983,\n\"longitude\": -71.044774,\n\"description\": \"Situated atop the Envoy Hotel in the Seaport, this rooftop bar offers amazing views of the city and harbor. It's a stylish place to enjoy craft cocktails and continue your conversation after the comedy show.\"\n}\n]\n},\n{\n\"plan_description\": \"Immerse yourselves in Boston's live music scene with a show at a popular venue. Before the concert, grab a casual and delicious meal nearby. It's a classic date night that promises great tunes and good company.\",\n\"locations_and_activities\": [\n{\n\"name\": \"Paradise Rock Club\",\n\"latitude\": 42.350798,\n\"longitude\": -71.114004,\n\"description\": \"A storied rock club near Boston University, Paradise Rock Club hosts a variety of musical acts. Check their schedule for the weekend to find a band you'll both enjoy in an intimate setting.\"\n},\n{\n\"name\": \"The Fenway\",\n\"latitude\": 42.346676,\n\"longitude\": -71.097241,\n\"description\": \"The area around Fenway Park offers numerous casual dining options perfect for a pre-show bite. You can find a variety of cuisines to suit your taste before heading to the concert.\"\n}\n]\n},\n{\n\"plan_description\": \"Explore the historic Boston Theatre District with a performance, followed by drinks at a nearby spot with a great atmosphere. This plan combines cultural enrichment with a chance to discuss the show and enjoy the vibrant nightlife of the area. It's an evening of entertainment and urban exploration.\",\n\"locations_and_activities\": [\n{\n\"name\": \"Charles Playhouse\",\n\"latitude\": 42.351968,\n\"longitude\": -71.065349,\n\"description\": \"Located in the Theatre District, the Charles Playhouse is home to long-running shows like Shear Madness and the Blue Man Group. Catching one of these unique performances can be a fun and memorable experience.\"\n},\n{\n\"name\": \"Royale\",\n\"latitude\": 42.351866,\n\"longitude\": -71.064289,\n\"description\": \"Also in the Theatre District, Royale is a large nightclub and venue that often hosts events and has a lively bar scene. It's a good option for drinks and soaking in the nightlife after a show.\"\n}\n]\n}\n]\n}\n```"
-      }
-    ],
-    "initial_session": {
-      "state": {},
-      "app_name": "planner",
-      "user_id": "user"
+{
+  "eval_set_id": "planner_eval",
+  "name": "planner_eval",
+  "description": null,
+  "eval_cases": [
+    {
+      "eval_id": "boston",
+      "conversation": [
+        {
+          "invocation_id": "e-664b7264-9f1d-41ad-ac15-3d40ed6f22a5",
+          "user_content": {
+            "parts": [
+              {
+                "video_metadata": null,
+                "thought": null,
+                "inline_data": null,
+                "file_data": null,
+                "code_execution_result": null,
+                "executable_code": null,
+                "function_call": null,
+                "function_response": null,
+                "text": "Plan something for me in Boston on the weekend of May 19th 2025, and something on nightlife and shows"
+              }
+            ],
+            "role": "user"
+          },
+          "final_response": {
+            "parts": [
+              {
+                "video_metadata": null,
+                "thought": null,
+                "inline_data": null,
+                "file_data": null,
+                "code_execution_result": null,
+                "executable_code": null,
+                "function_call": null,
+                "function_response": null,
+                "text": "Okay, I can help with that! Here are three dating plan suggestions for the weekend of May 19th, 2025, in Boston, focusing on nightlife and shows, and designed to be fun and moderately priced:\n\n"
+              },
+              {
+                "video_metadata": null,
+                "thought": null,
+                "inline_data": null,
+                "file_data": null,
+                "code_execution_result": null,
+                "executable_code": null,
+                "function_call": null,
+                "function_response": null,
+                "text": "Okay, here are three date plans for the weekend of May 19th, 2025 in Boston, focusing on nightlife and shows while keeping a moderate budget in mind:\n\n**Plan 1: Comedy & Craft Brews**\n\n*   **Afternoon (5:00 PM):** Start the evening with some laughs at **Laugh Boston** (425 Summer St, Boston, MA 02210, USA; Latitude: 42.3526, Longitude: -71.0457). This comedy club hosts a variety of stand-up acts. Check their schedule for May 19th, 2025, and book tickets in advance.\n*   **Evening (7:00 PM):** Head over to the **Dorchester Brewing Company** (1250 Massachusetts Ave, Boston, MA 02125, USA; Latitude: 42.3309, Longitude: -71.0779) to enjoy a beer at their rooftop bar and greenhouse. Have some pizza, enjoy the brewery atmosphere, and spend some time outdoors on their rooftop terrace.\n*   **Night (9:00 PM):** Continue the evening at a speakeasy such as **Carrie Nation Cocktail Bar** (11 William St, Boston, MA 02110, USA; Latitude: 42.3541, Longitude: -71.0591).\n\n**Plan 2: Rooftop Views & Live Music**\n\n*   **Afternoon (6:00 PM):** Begin the evening at **Deck 12 at YOTEL Boston** (65 Seaport Blvd 12th Floor, Boston, MA 02210, USA; Latitude: 42.3504, Longitude: -71.0448) for rooftop cocktails with panoramic views of the Boston waterfront.\n*   **Evening (8:00 PM):** Head to the **Brighton Music Hall** (158 Brighton Ave, Boston, MA 02134, USA; Latitude: 42.3516, Longitude: -71.1314) for a live music performance. On May 19, 2025, the band Squid will be performing there.\n*   **Late Night (10:00 PM):** Cap off the night with some bar games at **Versus Arcade Bar** (89 Canal St, Boston, MA 02114, USA; Latitude: 42.3643, Longitude: -71.0603), where you can enjoy drinks while playing arcade games.\n\n**Plan 3: Historic Tavern & Theater District Show**\n\n*   **Evening (6:00 PM):** Immerse yourselves in history with drinks at the **Green Dragon Tavern** (11 Marshall St, Boston, MA 02108, USA; Latitude: 42.3604, Longitude: -71.0577), one of Boston's oldest and most historic pubs. Enjoy the atmosphere and grab a bite to eat.\n*   **Night (8:00 PM):** Catch a show in the **Theater District**. Check listings for the **Wilbur Theatre** (246 Tremont St, Boston, MA 02116, USA; Latitude: 42.3518, Longitude: -71.0644).\n*   **Late Night (10:30 PM):** After the show, enjoy a nightcap at a bar near the Theater District.\n\nI hope these suggestions give you a great starting point for planning a fun and memorable weekend in Boston!\n"
+              }
+            ],
+            "role": null
+          },
+          "intermediate_data": {
+            "tool_uses": [],
+            "intermediate_responses": []
+          },
+          "creation_timestamp": 1749088305.204053
+        }
+      ],
+      "session_input": {
+        "app_name": "planner",
+        "user_id": "user",
+        "state": {}
+      },
+      "creation_timestamp": 1749088359.2324417
+    },
+    {
+      "eval_id": "sanfran",
+      "conversation": [
+        {
+          "invocation_id": "e-cc14daa1-0893-450d-a41b-8c0de6e2493f",
+          "user_content": {
+            "parts": [
+              {
+                "video_metadata": null,
+                "thought": null,
+                "inline_data": null,
+                "file_data": null,
+                "code_execution_result": null,
+                "executable_code": null,
+                "function_call": null,
+                "function_response": null,
+                "text": "Plan something for me in San Francisco on the weekend of May 26th 2025, and something on coffee and art"
+              }
+            ],
+            "role": "user"
+          },
+          "final_response": {
+            "parts": [
+              {
+                "video_metadata": null,
+                "thought": null,
+                "inline_data": null,
+                "file_data": null,
+                "code_execution_result": null,
+                "executable_code": null,
+                "function_call": null,
+                "function_response": null,
+                "text": "Okay, I will generate 3 creative dating plan suggestions for the weekend of May 26th, 2025, in San Francisco, with a focus on coffee and art.\n\n"
+              },
+              {
+                "video_metadata": null,
+                "thought": null,
+                "inline_data": null,
+                "file_data": null,
+                "code_execution_result": null,
+                "executable_code": null,
+                "function_call": null,
+                "function_response": null,
+                "text": "Here are 3 dating plan suggestions for the weekend of May 26th, 2025, in San Francisco, combining coffee and art:\n\n**Plan 1: Coffee Art Immersion in the Mission District**\n\n*   **Morning (10:00 AM):** Start your day at Grand Coffee ([37.7571, -122.4185]), a local favorite in the Mission known for its excellent coffee and vibrant atmosphere. Enjoy a specialty latte and pastry while admiring the street art in the neighborhood.\n*   **Mid-day (11:30 AM):** Take a stroll through the Mission District, known for its colorful murals. Focus on the area around Balmy Alley ([37.7527, -122.4209]), a concentrated collection of community murals with social and political themes.\n*   **Lunch (1:00 PM):** Have lunch at a restaurant in the Mission District offering Latin American cuisine ([example restaurants listed in source 16]).\n\n*   **Afternoon (2:30 PM):** Visit Juan R Fuentes Gallery / Accion Latina ([Lat/Lon not found, check in advance]), a community-based art space showcasing local Latino artists and cultural events. Check for any exhibitions or workshops happening that weekend.\n*   **Evening (6:00 PM):** Enjoy dinner at a restaurant that has art ([check in advance]).\n\n**Plan 2: Fort Mason Art Walk and Coffee Break**\n\n*   **Afternoon (2:00 PM):** Start your afternoon with coffee at Equator Coffees Cafe in Fort Mason Center ([37.8074, -122.4164]).\n*   **Late Afternoon/Evening (5:00 PM - 8:00 PM):** Head to the Fort Mason Center for Arts & Culture Art Walk. According to search results, the Art Walk is scheduled for May 22, 2025 ([37.8074, -122.4164]). Check the official Fort Mason Center website for updated information regarding the Art Walk. The Art Walk features pop-up artist talks, exhibitions, opening receptions, printing workshops, tours, and an art workshop.\n*   **Dinner (8:30 PM):** Conclude your date with dinner at Radhaus Alpine Beerhall & Restaurant ([37.8074, -122.4164]) in Fort Mason, offering German-inspired cuisine.\n\n**Plan 3: Hayes Valley Art & Garden Walk and Café**\n\n*   **Afternoon (2:00 PM):** Begin your date with a visit to Hayes Valley Art Works (HVAW) Gallery ([37.7742, -122.4233]) for the Hayes Valley Art & Garden Walk. This event connects the local community with artists, gardens, and musicians in a relaxed setting. Check the HVAW website for specific details on the day's activities.\n*   **Late Afternoon (4:00 PM):** Enjoy the Art & Garden walk to visit various artists.\n*   **Dinner (7:00 PM):** Have dinner at a restaurant nearby HVAW Gallery.\n"
+              }
+            ],
+            "role": null
+          },
+          "intermediate_data": {
+            "tool_uses": [],
+            "intermediate_responses": []
+          },
+          "creation_timestamp": 1749088387.69736
+        }
+      ],
+      "session_input": {
+        "app_name": "planner",
+        "user_id": "user",
+        "state": {}
+      },
+      "creation_timestamp": 1749088454.4510818
+    },
+    {
+      "eval_id": "nyc",
+      "conversation": [
+        {
+          "invocation_id": "e-77af75a0-5a55-4de7-bfe8-a4d9c56ae4ff",
+          "user_content": {
+            "parts": [
+              {
+                "video_metadata": null,
+                "thought": null,
+                "inline_data": null,
+                "file_data": null,
+                "code_execution_result": null,
+                "executable_code": null,
+                "function_call": null,
+                "function_response": null,
+                "text": "Plan something for me in New York City on the weekend of May 26th 2025, and something on outdoor and food\n"
+              }
+            ],
+            "role": "user"
+          },
+          "final_response": {
+            "parts": [
+              {
+                "video_metadata": null,
+                "thought": null,
+                "inline_data": null,
+                "file_data": null,
+                "code_execution_result": null,
+                "executable_code": null,
+                "function_call": null,
+                "function_response": null,
+                "text": "Okay, I will create three dating plans for the weekend of May 26th, 2025 (May 26th to May 27th), in New York City, focusing on outdoor activities and food.\n\n"
+              },
+              {
+                "video_metadata": null,
+                "thought": null,
+                "inline_data": null,
+                "file_data": null,
+                "code_execution_result": null,
+                "executable_code": null,
+                "function_call": null,
+                "function_response": null,
+                "text": "Here are three dating plan suggestions for your weekend in New York City, focusing on outdoor activities and food:\n\n**Plan 1: Greenmarket Stroll & Picnic in Central Park**\n\n*   **Description:** Start your Sunday morning with a visit to the **79th Street Greenmarket** (40.7816, -73.9731). This bustling market, running along Columbus Avenue from 77th to 81st Streets, offers a wide array of local produce, cheeses, baked goods, and more. Sample artisanal foods and pick up ingredients for a delightful picnic. Afterwards, head into **Central Park** (40.7829, -73.9654), find a scenic spot near the Bethesda Terrace or the Sheep Meadow, and enjoy your curated picnic amidst the vibrant atmosphere of the park. You can extend your afternoon by renting a rowboat at The Loeb Boathouse.\n*   **Why it's great:** This plan combines the fun of exploring a local market with the relaxation of a picnic in one of the world's most famous parks. It's a classic, romantic, and relatively inexpensive date.\n\n**Plan 2: Smorgasburg & Brooklyn Bridge Park**\n\n*   **Description:** Spend Saturday indulging in diverse culinary offerings at **Smorgasburg Williamsburg** (40.7178, -73.9641), a large outdoor food market with over 70 vendors. Enjoy unique street food with options like Ethiopian stews, Hawaiian comforts, and explosive pani puri. After satisfying your taste buds, take a leisurely stroll through **Brooklyn Bridge Park** (40.7025, -73.9933), which offers stunning views of the Manhattan skyline. End the evening with drinks at a bar in DUMBO, such as Time Out Market, to continue enjoying the skyline views.\n*   **Why it's great:** This plan combines the excitement of a food festival with the beauty of a waterfront park. It's perfect for foodies and those who appreciate scenic views.\n\n**Plan 3: Fleet Week Ship Tours & Pier Dining**\n\n*   **Description:** Take advantage of Fleet Week and tour naval ships docked at Manhattan's Pier 88 (approx. 40.7650, -74.0025) or Staten Island's Homeport Pier (approx. 40.6333, -74.0667). Enjoy learning about the vessels and meeting active-duty service members (be sure to check for tour times and security requirements). Afterward, head to **Riverpark** (40.7389, -73.9754) in Kips Bay for a seafood-forward New American cuisine with outdoor seating and panoramic views of the East River. The Terrace Bar at Riverpark is a seasonal outdoor space where you can have drinks and lite bites.\n*   **Why it's great:** This plan combines a unique cultural experience with a fine dining experience. Fleet Week offers a chance to see something different, and Riverpark provides a beautiful setting for a romantic dinner.\n"
+              }
+            ],
+            "role": null
+          },
+          "intermediate_data": {
+            "tool_uses": [],
+            "intermediate_responses": []
+          },
+          "creation_timestamp": 1749088489.149146
+        }
+      ],
+      "session_input": {
+        "app_name": "planner",
+        "user_id": "user",
+        "state": {}
+      },
+      "creation_timestamp": 1749088501.3390052
     }
-  },
-  {
-    "name": "sanfran",
-    "data": [
-      {
-        "query": "Plan something for me in San Francisco on the weekend of May 26th 2025, and something on coffee and art",
-        "expected_tool_use": [],
-        "expected_intermediate_agent_responses": [],
-        "reference": "```json\n{\n\"fun_plans\": [\n{\n\"plan_description\": \"Start your artistic adventure with a visit to a premier modern art museum, immersing yourselves in incredible contemporary works. Afterwards, find a cozy spot within the museum's own cafe to discuss your favorite pieces over expertly brewed coffee. It's a perfect blend of culture and conversation for a relaxed and inspiring date.\",\n\"locations_and_activities\": [\n{\n\"name\": \"San Francisco Museum of Modern Art (SFMOMA)\",\n\"latitude\": 37.785717,\n\"longitude\": -122.401161,\n\"description\": \"Explore seven floors of inspiring modern and contemporary art from around the world. SFMOMA houses a vast collection and typically has engaging exhibitions running. Check their website for specific exhibitions during the weekend of May 24th-25th, 2025.\"\n},\n{\n\"name\": \"Sightglass Coffee at SFMOMA\",\n\"latitude\": 37.785717,\n\"longitude\": -122.401161,\n\"description\": \"Located inside SFMOMA, this outpost of the popular local roaster offers high-quality coffee and pastries. It's a great place to take a break and chat after exploring the museum galleries.\"\n}\n]\n},\n{\n\"plan_description\": \"Dive into the vibrant street art scene of the Mission District, strolling through famous alleys bursting with colorful murals and powerful messages. After soaking in the outdoor gallery, find a beloved local coffee shop nearby to refuel and enjoy a delicious cup. It\u2019s a dynamic and visually stimulating way to spend time together, experiencing the city's unique creative energy.\",\n\"locations_and_activities\": [\n{\n\"name\": \"Balmy Alley Mural Project\",\n\"latitude\": 37.762914,\n\"longitude\": -122.421658,\n\"description\": \"Balmy Alley is a famous block-long alley in the Mission District known for its vibrant and historical murals, which often depict political and social themes. It's an ever-evolving outdoor art gallery best explored on foot.\"\n},\n{\n\"name\": \"Clarion Alley Mural Project (CAMP)\",\n\"latitude\": 37.761740,\n\"longitude\": -122.421420,\n\"description\": \"Just a few blocks from Balmy Alley, Clarion Alley is another must-see for street art enthusiasts. This alley features a diverse collection of murals by local and international artists, reflecting community issues and artistic expression.\"\n},\n{\n\"name\": \"Ritual Coffee Roasters (Valencia Street)\",\n\"latitude\": 37.759752,\n\"longitude\": -122.421056,\n\"description\": \"A cornerstone of the Bay Area coffee scene, Ritual's original location on Valencia Street in the Mission offers exceptional coffee in a lively setting. It's a perfect spot to grab a pour-over or espresso after exploring the nearby murals.\"\n}\n]\n},\n{\n\"plan_description\": \"Explore a contemporary art gallery known for showcasing diverse artists and exhibitions in a cool downtown setting. Conveniently, this unique venue also houses its own cafe, allowing you to seamlessly transition from admiring art to enjoying a great cup of coffee. It\u2019s an effortlessly cool and engaging way to connect over shared interests.\",\n\"locations_and_activities\": [\n{\n\"name\": \"111 Minna Gallery\",\n\"latitude\": 37.787090,\n\"longitude\": -122.399710,\n\"description\": \"Located in the heart of the Financial District, 111 Minna Gallery is a dynamic art and event space that features rotating exhibitions of contemporary art. It offers an urban industrial feel and has been a cultural hub for decades.\"\n},\n{\n\"name\": \"Red Door Coffee at 111 Minna Gallery\",\n\"latitude\": 37.787090,\n\"longitude\": -122.399710,\n\"description\": \"Situated inside 111 Minna Gallery, Red Door Coffee provides a convenient and artsy spot to enjoy a variety of coffee drinks and other beverages while surrounded by the gallery's current exhibition. It's a seamless combination of art and cafe culture.\"\n}\n]\n}\n]\n}\n```"
-      }
-    ],
-    "initial_session": {
-      "state": {},
-      "app_name": "planner",
-      "user_id": "user"
-    }
-  },
-  {
-    "name": "nyc",
-    "data": [
-      {
-        "query": "Plan something for me in New York City on the weekend of May 26th 2025, and something on outdoor and food",
-        "expected_tool_use": [],
-        "expected_intermediate_agent_responses": [],
-        "reference": "```json\n{\n\"fun_plans\": [\n{\n\"plan_description\": \"Embrace the vibrant energy of a New York City street fair coupled with some delicious outdoor eats! Spend the afternoon exploring unique vendors and soaking in the local atmosphere, then find a sunny spot in a nearby park to enjoy some fantastic food truck finds. This plan offers a perfect blend of browsing, fresh air, and satisfying your taste buds in a lively setting.\",\n\"locations_and_activities\": [\n{\n\"name\": \"Urbanspace Makers Market at Bryant Park\",\n\"latitude\": 40.753855,\n\"longitude\": -73.983537,\n\"description\": \"This outdoor market features over 175 local vendors selling handcrafted goods, art, jewelry, and food. It's open on weekends and Memorial Day during this period, running from 11 am to 7 pm.\"\n},\n{\n\"name\": \"Bryant Park\",\n\"latitude\": 40.753855,\n\"longitude\": -73.983537,\n\"description\": \"A centrally located park behind the New York Public Library, offering plenty of green space, tables, and a lively atmosphere perfect for enjoying food from the market or nearby food trucks.\"\n}\n]\n},\n{\n\"plan_description\": \"Experience the charm of a waterfront park with stunning views and tasty food options for a relaxed and scenic date. Enjoy a leisurely stroll along the East River, take in the iconic skyline, and then settle down to enjoy some delicious bites from the park's concessions or nearby eateries. It's a wonderful way to enjoy the outdoors and good food with a picturesque backdrop.\",\n\"locations_and_activities\": [\n{\n\"name\": \"Brooklyn Bridge Park\",\n\"latitude\": 40.701166,\n\"longitude\": -73.996777,\n\"description\": \"Located on the East River, this park offers unparalleled views of the Manhattan skyline and Statue of Liberty. It has lawns, pebble beaches, and picnic tables, along with various food and beverage concessions like Fornino (pizza) and OddFellows Ice Cream Co.\"\n},\n{\n\"name\": \"Fornino at Brooklyn Bridge Park (Pier 6)\",\n\"latitude\": 40.693012,\n\"longitude\": -73.999953,\n\"description\": \"A pizza concession located within Brooklyn Bridge Park, offering a casual outdoor dining option with waterfront views.\"\n}\n]\n},\n{\n\"plan_description\": \"Combine the beauty of a sprawling park with the simple pleasure of a classic outdoor meal. Head to one of NYC's beloved large parks with a pre-packed picnic or grab supplies from a local market before finding your perfect spot. This allows for a relaxed and intimate date surrounded by nature, with the freedom to enjoy your favorite foods at your own pace.\",\n\"locations_and_activities\": [\n{\n\"name\": \"Central Park (Sheep Meadow)\",\n\"latitude\": 40.772142,\n\"longitude\": -73.976338,\n\"description\": \"A large, iconic open space in Central Park perfect for laying out a blanket and enjoying a picnic. It offers a classic New York outdoor experience with plenty of room to relax and people-watch.\"\n},\n{\n\"name\": \"Central Park\",\n\"latitude\": 40.781204,\n\"longitude\": -73.973895,\n\"description\": \"An expansive urban park offering numerous grassy areas, benches, and scenic spots ideal for a picnic. You can bring your own food or find nearby delis and markets to assemble your meal.\"\n}\n]\n}\n]\n}\n```"
-      }
-    ],
-    "initial_session": {
-      "state": {},
-      "app_name": "planner",
-      "user_id": "user"
-    }
-  }
-]
+  ],
+  "creation_timestamp": 1749088353.8242972
+}

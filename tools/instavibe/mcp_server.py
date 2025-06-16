@@ -36,7 +36,6 @@ available_tools = {
 app = Server("adk-tool-mcp-server")
 sse = SseServerTransport("/messages/")
 
-
 #REPLACE ME - LIST TOOLS
 
 #REPLACE ME - CALL TOOLS
