@@ -41,7 +41,7 @@ async def get_agent_async():
 
   root_agent = LlmAgent(
       model='gemini-2.5-pro-preview-06-05', # Adjust model name if needed based on availability
-      name='social_agent',
+      name='create_post_event_agent',
       instruction="""
         You are a friendly and efficient assistant for the Instavibe social app.
         Your primary goal is to help users create posts and register for events using the available tools.
