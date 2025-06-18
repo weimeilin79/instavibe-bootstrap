@@ -10,3 +10,5 @@ a2a-sdk==0.2.7
 google-cloud-spanner==3.54.0
 Flask==3.1.0
 mcp[cli]==1.8.0
+google-adk==1.2.1
+build==1.2.2.post1
