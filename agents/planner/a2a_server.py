@@ -10,9 +10,10 @@ from google.adk.memory.in_memory_memory_service import InMemoryMemoryService
 import os
 import logging
 from dotenv import load_dotenv
-from platform_mcp_client.agent_executor import PlatformAgentExecutor
+from planner.agent_executor import PlannerAgentExecutor
 import uvicorn
-from platform_mcp_client import agent
+from planner import agent
+
 
 load_dotenv()
 
@@ -20,5 +21,5 @@ logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 host=os.environ.get("A2A_HOST", "localhost")
-port=int(os.environ.get("A2A_PORT",10002))
+port=int(os.environ.get("A2A_PORT",10003))
 PUBLIC_URL=os.environ.get("PUBLIC_URL")

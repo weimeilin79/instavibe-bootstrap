@@ -1,15 +1,90 @@
+# Define substitutions
+substitutions:
+  _PROJECT_ID: "$PROJECT_ID"
+  _PROJECT_NUMBER: "$PROJECT_NUMBER"
+  _REGION: "$REGION"
+  _REPO_NAME: "$REPO_NAME"
+  _SPANNER_INSTANCE_ID: "$SPANNER_INSTANCE_ID"
+  _SPANNER_DATABASE_ID: "$SPANNER_DATABASE_ID"
+  _MCP_SERVER_URL: "$MCP_SERVER_URL"
+  _IMAGE_TAG: "latest"
+
 steps:
-  # Build the container image for the specified agent
-  - name: 'gcr.io/cloud-builders/docker'
-    args:
-      [
-        'build',
-        '-t',
-        '${_IMAGE_PATH}', # Use substitution for the full image path + tag
-        '-f',
-        '${_AGENT_NAME}/Dockerfile', # Dynamically point to the correct Dockerfile
-        '.', # Build context is the project root
-      ]
-# Specify the image(s) to push upon successful build.
-images:
-  - '${_IMAGE_PATH}'
+# --- Step 1: Parallel Docker Builds ---
+# Build platform_mcp_client agent 
+- id: 'build-mcp-client'
+  name: 'gcr.io/cloud-builders/docker'
+  waitFor: ["-"]
+  args:
+    - 'build'
+    - '-t'
+    - '${_REGION}-docker.pkg.dev/${_PROJECT_ID}/${_REPO_NAME}/platform_mcp_client-agent:${_IMAGE_TAG}'
+    - '-f'
+    - './platform_mcp_client/Dockerfile'
+    - '.'
+
+# Build social agent 
+- id: 'build-social'
+  name: 'gcr.io/cloud-builders/docker'
+  waitFor: ["-"]
+  args:
+    - 'build'
+    - '-t'
+    - '${_REGION}-docker.pkg.dev/${_PROJECT_ID}/${_REPO_NAME}/social-agent:${_IMAGE_TAG}'
+    - '-f'
+    - './social/Dockerfile'
+    - '.'
+
+# --- Step 2: Parallel Docker Pushes ---
+- id: 'push-mcp-client'
+  name: 'gcr.io/cloud-builders/docker'
+  waitFor: ['build-mcp-client'] 
+  args:
+    - 'push'
+    - '${_REGION}-docker.pkg.dev/${_PROJECT_ID}/${_REPO_NAME}/platform_mcp_client-agent:${_IMAGE_TAG}'
+
+- id: 'push-social'
+  name: 'gcr.io/cloud-builders/docker'
+  waitFor: ['build-social'] 
+  args:
+    - 'push'
+    - '${_REGION}-docker.pkg.dev/${_PROJECT_ID}/${_REPO_NAME}/social-agent:${_IMAGE_TAG}'
+
+# --- Step 3: Parallel Deployments ---
+
+# Deploy platform_mcp_client agent
+- id: 'deploy-mcp-client'
+  name: 'gcr.io/cloud-builders/gcloud'
+  waitFor: ['push-mcp-client'] 
+  args:
+    - 'run'
+    - 'deploy'
+    - 'platform-mcp-client'
+    - '--image=${_REGION}-docker.pkg.dev/${_PROJECT_ID}/${_REPO_NAME}/platform_mcp_client-agent:${_IMAGE_TAG}'
+    - '--platform=managed'
+    - '--region=${_REGION}'
+    - '--allow-unauthenticated'
+    - '--project=${_PROJECT_ID}'
+    - '--set-env-vars=SPANNER_INSTANCE_ID=${_SPANNER_INSTANCE_ID},SPANNER_DATABASE_ID=${_SPANNER_DATABASE_ID},GOOGLE_CLOUD_PROJECT=${_PROJECT_ID},A2A_HOST=0.0.0.0,A2A_PORT=8080,PUBLIC_URL=https://platform-mcp-client-${_PROJECT_NUMBER}.${_REGION}.run.app,GOOGLE_GENAI_USE_VERTEXAI=TRUE,GOOGLE_CLOUD_LOCATION=${_REGION},MCP_SERVER_URL=${_MCP_SERVER_URL}'
+    - '--min-instances=1'
+  env: 
+    - 'GOOGLE_CLOUD_PROJECT=${_PROJECT_ID}'
+
+# Deploy social agent
+- id: 'deploy-social'
+  name: 'gcr.io/cloud-builders/gcloud'
+  waitFor: ['push-social'] 
+  args:
+    - 'run'
+    - 'deploy'
+    - 'social-agent'
+    - '--image=${_REGION}-docker.pkg.dev/${_PROJECT_ID}/${_REPO_NAME}/social-agent:${_IMAGE_TAG}'
+    - '--platform=managed'
+    - '--region=${_REGION}'
+    - '--set-env-vars=SPANNER_INSTANCE_ID=${_SPANNER_INSTANCE_ID},SPANNER_DATABASE_ID=${_SPANNER_DATABASE_ID},GOOGLE_CLOUD_PROJECT=${_PROJECT_ID},A2A_HOST=0.0.0.0,A2A_PORT=8080,PUBLIC_URL=https://social-agent-${_PROJECT_NUMBER}.${_REGION}.run.app,GOOGLE_GENAI_USE_VERTEXAI=TRUE,GOOGLE_CLOUD_LOCATION=${_REGION}'
+    - '--allow-unauthenticated'
+    - '--project=${_PROJECT_ID}'
+    - '--min-instances=1'
+  env: 
+    - 'GOOGLE_CLOUD_PROJECT=${_PROJECT_ID}'
+

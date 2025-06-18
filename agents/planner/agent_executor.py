@@ -32,7 +32,8 @@ logger.setLevel(logging.DEBUG)
 # Constants
 DEFAULT_USER_ID = 'self'
 
-class PlatformAgentExecutor(AgentExecutor):
+
+class PlannerAgentExecutor(AgentExecutor):
     def __init__(self, runner: Runner, card: AgentCard):
         self.runner = runner
         self._card = card
@@ -112,7 +113,7 @@ class PlatformAgentExecutor(AgentExecutor):
             context.context_id,
             updater,
         )
-        logger.debug('[PlatformAgentExecutor] execute exiting')
+        logger.debug('[PlannerAgentExecutor] execute exiting')
 
     async def cancel(self, context: RequestContext, event_queue: EventQueue):
         """Cancel the execution for the given context.
@@ -151,7 +152,6 @@ class PlatformAgentExecutor(AgentExecutor):
                 session_id=session_id,
             )
         return session
-
 
 def convert_a2a_part_to_genai(part: Part) -> types.Part:
     """Convert a single A2A Part type into a Google Gen AI Part type.

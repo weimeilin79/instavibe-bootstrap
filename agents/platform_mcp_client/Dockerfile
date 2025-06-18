@@ -9,7 +9,6 @@ WORKDIR /app
 # --- Dependency Installation ---
 # Copy only the requirements file first to leverage Docker cache
 COPY ./platform_mcp_client/requirements.txt /app/requirements.txt
-COPY ./a2a_common-0.1.0-py3-none-any.whl /app/a2a_common-0.1.0-py3-none-any.whl
 RUN pip install --no-cache-dir -r requirements.txt
 
 
