@@ -1,0 +1,15 @@
+steps:
+  # Build the container image for the specified agent
+  - name: 'gcr.io/cloud-builders/docker'
+    args:
+      [
+        'build',
+        '-t',
+        '${_IMAGE_PATH}', # Use substitution for the full image path + tag
+        '-f',
+        '${_AGENT_NAME}/Dockerfile', # Dynamically point to the correct Dockerfile
+        '.', # Build context is the project root
+      ]
+# Specify the image(s) to push upon successful build.
+images:
+  - '${_IMAGE_PATH}'
