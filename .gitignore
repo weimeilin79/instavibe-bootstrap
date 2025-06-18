@@ -1,0 +1,41 @@
+# Python virtual environments
+**/venv/
+**/env/
+**/.env/
+**/.venv/
+**/ENV/
+**/*.pyc
+**/__pycache__/
+**/.Python
+.env
+.python-version
+.env.local
+.env.*.local
+
+# IDE settings
+.idea/
+.vscode/
+*.swp
+*.swo
+.DS_Store
+
+# Python artifacts
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
