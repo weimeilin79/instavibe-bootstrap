@@ -2,7 +2,8 @@ import asyncio
 from contextlib import AsyncExitStack
 from dotenv import load_dotenv
 from google.adk.agents.llm_agent import LlmAgent
-from google.adk.tools.mcp_tool.mcp_toolset import MCPToolset, SseServerParams
+from google.adk.tools.mcp_tool.mcp_toolset import MCPToolset
+from google.adk.tools.mcp_tool.mcp_session_manager import SseServerParams
 import logging 
 import os
 import nest_asyncio 
@@ -82,15 +83,9 @@ async def initialize():
            log.info("Agent initialized successfully.")
        else:
            log.error("Agent initialization failed.")
-       
    else:
        log.info("Agent already initialized.")
 
-def _cleanup_sync():
-    """Synchronous wrapper to attempt async cleanup."""
-    log.info("MCP connection cleanup is now handled externally.")
-    # No specific cleanup action needed here as exit_stack is managed elsewhere.
-    pass 
 
 
 nest_asyncio.apply()

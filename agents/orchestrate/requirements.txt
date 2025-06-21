@@ -1,4 +1,7 @@
-google-cloud-aiplatform==1.95.1
-google-adk==1.2.1
+google-cloud-aiplatform==1.98.0
+google-adk==1.4.2
 python-dateutil==2.9.0.post0
-a2a-sdk==0.2.7
+a2a-sdk==0.2.8
+google-genai==1.21.0
+cloudpickle==3.1.1
+pydantic==2.11.7
