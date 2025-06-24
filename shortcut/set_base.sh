@@ -39,6 +39,7 @@ SPANNER_DATABASE_ID="graphdb"
 ARTIFACT_REPO_NAME="introveally-repo"
 GOOGLE_CLOUD_LOCATION="us-central1"
 MAPS_API_KEY_DISPLAY_NAME="Maps Platform API Key - InstaVibe"
+IMAGE_NAME="instavibe-webapp"
 SERVICE_NAME="instavibe"
 
 # --- Helper Functions ---
@@ -236,7 +237,7 @@ log "Application setup complete."
 
 # --- Step 10: Build Application Container with Cloud Build ---
 log "--- Step 10: Building the application container ---"
-IMAGE_PATH="${GOOGLE_CLOUD_LOCATION}-docker.pkg.dev/${PROJECT_ID}/${ARTIFACT_REPO_NAME}/${SERVICE_NAME}:latest"
+IMAGE_PATH="${GOOGLE_CLOUD_LOCATION}-docker.pkg.dev/${PROJECT_ID}/${ARTIFACT_REPO_NAME}/${IMAGE_NAME}:latest"
 
 cd instavibe
 gcloud builds submit . --tag="${IMAGE_PATH}" --project="${PROJECT_ID}"
