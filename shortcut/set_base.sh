@@ -39,7 +39,7 @@ SPANNER_DATABASE_ID="graphdb"
 ARTIFACT_REPO_NAME="introveally-repo"
 GOOGLE_CLOUD_LOCATION="us-central1"
 MAPS_API_KEY_DISPLAY_NAME="Maps Platform API Key - InstaVibe"
-SERVICE_NAME="instavibe-webapp"
+SERVICE_NAME="instavibe"
 
 # --- Helper Functions ---
 log() {
