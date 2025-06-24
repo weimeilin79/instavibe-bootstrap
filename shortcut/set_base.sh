@@ -213,17 +213,18 @@ gcloud services api-keys update "$KEY_NAME" --api-target="service=maps-javascrip
 log "API Key has been created and restricted to the Maps JavaScript API."
 
 
-# --- Step 9: Setup Python Environment & Application ---
-log "--- Step 9: Setting up local Python environment and application ---"
-if [ -d "env" ]; then
+# --- Step 9: Setup Python Environment & Application Data ---
+log "--- Step 9: Setting up Python environment and populating database ---"
+VENV_PATH="$REPO_DIR_PATH/env"
+if [ -d "$VENV_PATH" ]; then
     log "Python virtual environment 'env' already exists. Re-activating it."
 else
-    python -m venv env
+    python -m venv "$VENV_PATH"
     log "Created Python virtual environment."
 fi
 
 log "Activating virtual environment and installing dependencies..."
-source env/bin/activate
+source "$VENV_PATH/bin/activate"
 pip install --upgrade pip
 pip install -r ~/$REPO_DIR_NAME/requirements.txt
 log "Python dependencies installed."
