@@ -215,7 +215,7 @@ log "API Key has been created and restricted to the Maps JavaScript API."
 
 # --- Step 9: Setup Python Environment & Application Data ---
 log "--- Step 9: Setting up Python environment and populating database ---"
-VENV_PATH="$REPO_DIR_PATH/env"
+VENV_PATH="$REPO_DIR_NAME/env"
 if [ -d "$VENV_PATH" ]; then
     log "Python virtual environment 'env' already exists. Re-activating it."
 else
