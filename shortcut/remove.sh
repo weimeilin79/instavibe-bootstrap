@@ -7,8 +7,7 @@
 # WARNING: This operation is destructive and cannot be undone.
 #
 
-# Stop the script if any command fails (unless handled with '|| true')
-set -e
+
 
 # --- User-configurable variables ---
 REPO_DIR_NAME="instavibe-bootstrap"
@@ -43,14 +42,24 @@ else
 fi
 
 # --- Step 2: Delete Agent Engine ---
-echo -e "\n${GREEN}---> Deleting Vertex AI Agent Engine...${NC}"
+echo -e "\n${GREEN}---> Checking for Vertex AI Agent Engine to delete...${NC}"
 UTILS_DIR=~/$REPO_DIR_NAME/utils
-if [ -d "$UTILS_DIR" ]; then
+ENDPOINT_FILE=~/$REPO_DIR_NAME/instavibe/temp_endpoint.txt
+VENV_ACTIVATE=~/$REPO_DIR_NAME/env/bin/activate
+
+# Attempt to read the agent ID from the file, suppressing "file not found" errors.
+ORCHESTRATE_AGENT_ID=$(cat "$ENDPOINT_FILE" 2>/dev/null)
+
+# THE CRITICAL CHECK: Only proceed if the Agent ID is non-empty AND all other files/dirs exist.
+if [ -n "$ORCHESTRATE_AGENT_ID" ] && [ -d "$UTILS_DIR" ] && [ -f "$VENV_ACTIVATE" ]; then
+    echo "Prerequisites met. Attempting to delete Agent Engine with ID: ${ORCHESTRATE_AGENT_ID}"
+    
     cd "$UTILS_DIR"
     # shellcheck source=/dev/null
-    source ~/$REPO_DIR_NAME/env/bin/activate
-    export ORCHESTRATE_AGENT_ID=$(cat ~/$REPO_DIR_NAME/instavibe/temp_endpoint.txt)
-    echo "Attempting to delete Agent Engine with ID: ${ORCHESTRATE_AGENT_ID}"
+    source "$VENV_ACTIVATE"
+    
+    # Export the variable so the child process (python script) can access it
+    export ORCHESTRATE_AGENT_ID
     
     # Run the Python script but continue even if it fails (e.g., if the agent is already deleted)
     python remote_delete.py || true
@@ -59,9 +68,9 @@ if [ -d "$UTILS_DIR" ]; then
     cd ~ # Return to home directory for safety
     echo "Agent Engine deletion command executed."
 else
-    echo -e "${YELLOW}Utils directory not found. Skipping Agent Engine deletion.${NC}"
+    echo -e "${YELLOW}Prerequisites for Agent Engine deletion not met. Skipping.${NC}"
+    echo "  (This is expected if the environment has been partially cleaned up)."
 fi
-
 
 # --- Step 3: Delete Cloud Run Services ---
 echo -e "\n${GREEN}---> Deleting Cloud Run services...${NC}"
